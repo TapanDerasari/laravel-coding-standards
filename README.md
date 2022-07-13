@@ -104,6 +104,7 @@ Put all DB related logic into Eloquent models or into Repository classes if you'
 ```
 ## 3. Validation
 Move validation from controllers to Request classes.
+
 **Bad**
 ```php
   public function store(Request $request)
@@ -207,6 +208,7 @@ public function store(Request $request)
 ```
 ## 5. Don't repeat yourself (DRY)
 Reuse code when you can. SRP is helping you to avoid duplication. So, reuse Blade templates, use Eloquent scopes etc.
+
 **Bad**
 ```php
 public function getActive()
@@ -242,6 +244,7 @@ public function scopeActive($q)
 ```
 ## 6. Prefer to use Eloquent over using Query Builder and raw SQL queries. Prefer collections over arrays
 Eloquently allows you to write readable and maintainable code. Also, Eloquent has great built-in tools like soft deletes, events, scopes etc.
+
 **Bad**
 ```php
 SELECT *
@@ -359,6 +362,7 @@ public function isAdmin()
 ```
 ## 11. Do not get data from the ".env" file directly
 Pass the data to config files instead and then use the  config() helper function to use the data in an application.
+
 **Bad**
 ```php
 $stripeKey = env('STRIPE_KEY');
