@@ -1,5 +1,8 @@
 # Laravel Coding Standards
-### for better readability and usage
+Hello there, An awesome laravel community. We all have our own way of coding but for better readabilty and usage, I've added some common best practices here.
+
+If you have any idea or suggestion then feel free to open a PR.
+
 
 
 ## Naming conventions
