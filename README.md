@@ -1,8 +1,8 @@
-#Laravel Coding Standards
-###for better readability and usage
+# Laravel Coding Standards
+### for better readability and usage
 
 
-##Naming conventions
+## Naming conventions
 | What  |How   |Good   |Bad   |
 | ------------ | ------------ | ------------ | ------------ |
 | controllers  | Singular  | ArticleController  |ArticlesController   |
