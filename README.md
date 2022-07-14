@@ -189,6 +189,8 @@ public function store(Request $request)
     }
 ```
 **Good**
+
+create a service class in app/Services/ArticleService.php
 ```php
 public function store(Request $request)
     {
@@ -375,7 +377,7 @@ $stripeSecret= env('STRIPE_SECRET');
     // config/services.php
    'stripe'=>[
           'key' => env('STRIPE_KEY'),
-		  'secret' => env('STRIPE_SECRET'),
+	  'secret' => env('STRIPE_SECRET'),
      ];
 
     // Use the data
