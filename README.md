@@ -176,6 +176,7 @@ public function rules()
 ```
 ## 4. Business logic should be in service class
 A controller must have only one responsibility, so move business logic from controllers to service classes. It will help us to use the same function for web and API.
+
 **Bad**
 ```php
 public function store(Request $request)
@@ -380,6 +381,14 @@ $stripeSecret= env('STRIPE_SECRET');
     // Use the data
     $stripeKey = config('services.stripe.key');
 ```
+also use .env.example file as reference for the other developer so he can get to know about the third party keys and secret.
+
+We can make our custom config file for the specific feature like for ex. we have used a OpenTok so we can make config file.
+
+```php
+//config/opentok.php
+//config/params.php
+```
 ## 12. Use config filesystem for the storage of media
 Store your local media files (profile, product photo etc...) to the storage folder instead of public folder:
 
@@ -397,11 +406,13 @@ Execute `php artisan storage:link`  for creating symlink in laravel  (public/sto
 ```
 **Store Image**
 ```php
- $path= $request->file('image')->store(‘image’,’public’);
+ $path= Storage::disk('public')->put('avatars/1', $request->image);
 ```
 **Usage**
 ```php
-<img src={{asset('storage/'.$product->image)}} title="product"></img>
+@if (Storage::disk('s3')->exists($user->avatar))
+    <img src={{Storage::disk('s3')->get($user->avatar)}} title="avatar"></img>
+@endif
 ```
 ## 13.Route service provider for web / api.
 ```php
@@ -530,4 +541,53 @@ class DatabaseSeeder extends Seeder
          \App\Models\Student::factory(1000)->create();
     }
 }
+```
+## 18.Laravel blade components
+
+Please refer the [components](https://laravel.com/docs/9.x/blade#components "documentation") for more information.
+
+for example here we are creating a simple alert component to show success/error message.
+
+`php artisan make:component Alert`
+
+This command will create two files:
+
+
+    app\View\Components\Alert.php
+    resources\views\components\alert.blade.php
+
+alert.php  file:
+```php
+<?php
+
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+
+class Alert extends Component
+{
+    public $type;
+    public $message;
+
+    public function __construct($type, $message)
+    {
+        $this->type = $type;
+        $this->message = $message;
+    }
+
+    public function render()
+    {
+        return view('components.alert');
+    }
+}
+```
+and in the alert.blade.php:
+
+    <div class="alert alert-{{ $type }}">
+        {{ $message }}
+    </div>
+
+and here we go, we can call the component as below in our blade file
+```php
+<x-alert type="error" :message="$message" class="mt-4"/>
 ```
