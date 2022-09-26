@@ -593,7 +593,7 @@ and here we go, we can call the component as below in our blade file
 ```php
 <x-alert type="error" :message="$message" class="mt-4"/>
 ```
-##19. env file
+## 19. env file
 
 Don't forget to change APP_URL in your .env file from` http://localhost` to the real URL, cause it will be the basis for any links in your email notifications and elsewhere.
 
@@ -603,7 +603,7 @@ Don't forget to change APP_URL in your .env file from` http://localhost` to the 
     APP_DEBUG=true
     APP_URL=http://localhost/project-name/public
 
-##20. Composer dependency commands
+## 20. Composer dependency commands
 
 - ` composer install` to install all the dependencies as specified in the **composer.lock** file.
 -  `composer update` will update your depencencies as they are specified in c**omposer.json** file.
@@ -611,10 +611,11 @@ Don't forget to change APP_URL in your .env file from` http://localhost` to the 
 -  `composer outdated` shows you the list of outdated packages.
 - `composer show -l` returns the complete list of packages. packages in need of update are colored **red**. the (still) up to date ones are colored **green**.
 
-##21. Steps to make your Laravel app ready for production
+## 21. Steps to make your Laravel app ready for production
 1 . Apply changes to your `.env` file:
 
 `APP_ENV=production`
+
 `APP_DEBUG=false`
 
 2 . Make sure that you are optimizing Composer's class autoloader map
