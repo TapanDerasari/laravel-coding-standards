@@ -593,3 +593,49 @@ and here we go, we can call the component as below in our blade file
 ```php
 <x-alert type="error" :message="$message" class="mt-4"/>
 ```
+##19. env file
+
+Don't forget to change APP_URL in your .env file from` http://localhost` to the real URL, cause it will be the basis for any links in your email notifications and elsewhere.
+
+    APP_NAME=Laravel
+    APP_ENV=local
+    APP_KEY=base64:9PHz3TL5C4YrdV6Gg/Xkkmx9btaE93j7rQTUZWm2MqU=
+    APP_DEBUG=true
+    APP_URL=http://localhost/project-name/public
+
+##20. Composer dependency commands
+
+- ` composer install` to install all the dependencies as specified in the **composer.lock** file.
+-  `composer update` will update your depencencies as they are specified in c**omposer.json** file.
+-  `composer update --dry-run`  to see all the dependencies being updated just like you would see when you run the composer update command. The only difference is it’s just a visual cue of which package will get updated to which version **without the actual dependency updation**.
+-  `composer outdated` shows you the list of outdated packages.
+- `composer show -l` returns the complete list of packages. packages in need of update are colored **red**. the (still) up to date ones are colored **green**.
+
+##21. Steps to make your Laravel app ready for production
+1 . Apply changes to your `.env` file:
+
+`APP_ENV=production`
+`APP_DEBUG=false`
+
+2 . Make sure that you are optimizing Composer's class autoloader map
+- `composer dump-autoload --optimize`
+- or along install: `composer install --optimize-autoloader --no-dev`
+
+3 . Cache the framework bootstrap files:
+- ` php artisan optimize`
+
+4 .  Compile all of the application's Blade templates:
+-  `php artisan view:cache`
+
+5 . (Optional) Compiling assets
+-  `npm run production`  You can also run this command in your local machine and directly add those minifield files to your master/main branch.
+
+6 . (Optional) Start Laravel task scheduler by adding the following Cron entry
+-  `* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1`
+
+7 . (Optional) Install, config and start the Supervisor ([docs](https://laravel.com/docs/master/queues#supervisor-configuration "docs")):
+
+8 . (Optional) Create a symbolic link to `public/storage` from `storage/app/public`
+-  `php artisan storage:link`
+
+for more information visit the [laravel deployment documentation](https://laravel.com/docs/master/deployment "laravel deployment documentation").
